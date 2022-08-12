@@ -3,7 +3,7 @@
 Hack stuff with your Game Boy !
 
 
-🎮 GBA Drive is a tool which runs on a Raspberry Pi Zero W connected to a Game Boy Advance.  
+🎮 GBA Drive is a tool which runs on a Raspberry Pi Zero W connected to a Game Boy Advance.
 Different wireless transceivers are connected to it in order to play with wireless protocols 🎮
 
 ![gba_menu_1.jpg](share/pictures/gba_menu_1.jpg)
@@ -66,6 +66,8 @@ The main goal is to gather different following wireless features.
 ![welcome.png](share/pictures/welcome.png)
 
 ![menu_wifi.png](share/pictures/menu_wifi.png)
+
+![menu_wifi.png](share/pictures/menu_radio.png)
 
 ## 🔧 Hardware
 
