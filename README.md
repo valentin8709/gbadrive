@@ -63,11 +63,11 @@ The main goal is to gather different following wireless features.
 
 ## Screenshots
 
-![welcome.png](share/pictures/welcome.png)
+![welcome.jpg](share/pictures/welcome.jpg)
 
-![menu_wifi.png](share/pictures/menu_wifi.png)
+![menu_wifi.jpg](share/pictures/menu_wifi.jpg)
 
-![menu_wifi.png](share/pictures/menu_radio.png)
+![menu_wifi.jpg](share/pictures/menu_radio.jpg)
 
 ## 🔧 Hardware
 
