@@ -1,30 +1,22 @@
-```
-
- ██████╗ ██████╗  █████╗     ██████╗ ██████╗ ██╗██╗   ██╗███████╗
-██╔════╝ ██╔══██╗██╔══██╗    ██╔══██╗██╔══██╗██║██║   ██║██╔════╝
-██║  ███╗██████╔╝███████║    ██║  ██║██████╔╝██║██║   ██║█████╗  
-██║   ██║██╔══██╗██╔══██║    ██║  ██║██╔══██╗██║╚██╗ ██╔╝██╔══╝  
-╚██████╔╝██████╔╝██║  ██║    ██████╔╝██║  ██║██║ ╚████╔╝ ███████╗
- ╚═════╝ ╚═════╝ ╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝
+# GBA Drive
 
 Hack stuff with your Game Boy !
-```
+
 
 🎮 GBA Drive is a tool which runs on a Raspberry Pi Zero W connected to a Game Boy Advance.  
 Different wireless transceivers are connected to it in order to play with wireless protocols 🎮
 
-# ![gba_menu_1.jpg](.attachments.9113680/gba_menu_1.jpg)🏹 Features
+![gba_menu_1.jpg](share/pictures/gba_menu_1.jpg)
+
+## 🏹 Features
 
 The beauty in the Game Boy Advance is that the console let you upload and run any code sent by the link cable. You can send a mini-game or data for multiplayer as intended, but you can also send any kind of code understandable by the GBA 😊 This feature let us upload code for streaming the Raspberry Pi screen on the GBA screen, and get the button hits in return.
 
 Now we will use the ability of the Raspberry Pi Zero and the GBA screen and gamepad to play with wireless protocols, just like a handmade [Flipper Zero](https://flipperzero.one/) !
 
-::: warn
-The GBA Drive project is a gathering of many super cool projects. I did no produce much work but mainly configuration and tweaking. See below the different projects I took.
 
-The code developed for the GBA Drive project is a clean interface whose purpose is to automate and make all these different projects work together =)
+>The GBA Drive project is a gathering of many super cool projects. I did no produce much work but mainly configuration and tweaking. See below the different projects I took. The code developed for the GBA Drive project is a clean interface whose purpose is to automate and make all these different projects work together =)
 
-:::
 
 ### 📶 Capabilities
 
@@ -67,16 +59,15 @@ The main goal is to gather different following wireless features.
 * No authentication at all, exception for SSH
 * By default (at startup), WiFi [wlan0] is running
 
-::: info
-Currently, the code is in bash and stream output to the GBA.
-
-I hope one day, I will be able to develop the same software as a GBA ROM and sending orders to the Raspberry Pi via the link cable instead of streaming the screen.
-
-:::
+> Currently, the code is in bash and stream output to the GBA. I hope one day, I will be able to develop the same software as a GBA ROM and sending orders to the Raspberry Pi via the link cable instead of streaming the screen.
 
 ## Screenshots
 
-## ![welcome.png](.attachments.9113680/welcome.png)![menu_wifi.png](.attachments.9113680/menu_wifi.png)🔧 Hardware
+![welcome.png](share/pictures/welcome.png)
+
+![menu_wifi.png](share/pictures/menu_wifi.png)
+
+## 🔧 Hardware
 
 Here is the harware used for GBA Drive.
 
@@ -133,7 +124,13 @@ Further steps:
 * the space left on the piece of wood will handle RFID and IR transmitters;
 * the WiFi dongle will be fixed on the sleeve.
 
-## ![gba_opened_3.jpg](.attachments.9113680/gba_opened_3.jpg)![gba_opened_4.jpg](.attachments.9113680/gba_opened_4.jpg)![gba_drive_back.jpg](.attachments.9113680/gba_drive_back.jpg)🪧 Setup
+![gba_opened_3.jpg](share/pictures/gba_opened_3.jpg)
+
+![gba_opened_4.jpg](share/pictures/gba_opened_4.jpg)
+
+![gba_drive_back.jpg](share/pictures/gba_drive_back.jpg)
+
+## 🪧 Setup
 
 How to setup GBA Drive?
 
@@ -244,10 +241,8 @@ Joystick 1 {
 
 ## 💡 Inspired by
 
-::: info
-This project is mainly a gathering of different fabulous works, including the following
+>This project is mainly a gathering of different fabulous works, including the following:
 
-:::
 
 🎨 Main inspiring projects:
 
