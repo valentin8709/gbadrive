@@ -130,6 +130,10 @@ Further steps:
 
 ![gba_drive_back.jpg](share/pictures/gba_drive_back.jpg)
 
+![gba_menu_1.jpg](share/pictures/gba_menu_2.jpg)
+
+You can see work in progress on the last picture (cursor wasn't removed yet, Raspberry Pi not attached, keyboard connected for testing)
+
 ## 🪧 Setup
 
 How to setup GBA Drive?
