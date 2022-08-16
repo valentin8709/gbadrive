@@ -10,7 +10,7 @@ Different wireless transceivers are connected to it in order to play with wirele
 
 ## 🏹 Features
 
-The beauty in the Game Boy Advance is that the console let you upload and run any code sent by the link cable. You can send a mini-game or data for multiplayer as intended, but you can also send any kind of code understandable by the GBA 😊 This feature let us upload code for streaming the Raspberry Pi screen on the GBA screen, and get the button hits in return.
+The beauty in the Game Boy Advance is that the console let you upload and run any code sent by the link cable. You can send a mini-game or data for multiplayer as intended, but you can also send any kind of code understandable by the GBA 😊 This feature let us upload code for streaming the Raspberry Pi screen onto the GBA screen, and get the button hits in return.
 
 Now we will use the ability of the Raspberry Pi Zero and the GBA screen and gamepad to play with wireless protocols, just like a handmade [Flipper Zero](https://flipperzero.one/) !
 
@@ -26,11 +26,12 @@ The main goal is to gather different following wireless features.
   * WiFi capture
   * WiFi deauth and capture handshake
   * WiFi password sniffer
+  * WiFi DNS scan
   * WiFi hotspot
   * WiFi connect default AP
 * Bluetooth - 2.4 GHz
   * Bluetooth gamepad via GBA input
-  * Bluetooth standard and low energye recon
+  * Bluetooth standard and low energy recon
   * Bluetooth capture
   * Bluetooth hotspot
 * Radio - 1-868 MHz
@@ -183,6 +184,7 @@ The main roadmap is:
   * [x] WiFi deauth
   * [x] WiFi capture
   * [x] WiFi password sniffer
+  * [x] WiFi DNS scan
   * [x] WiFi hotspot
   * [x] WiFi connect
 * [ ] [WIP] Develop Bluetooth features
@@ -199,8 +201,8 @@ The main roadmap is:
 * [ ] Develop 400-900 MHz features
   * [ ] Radio capture and replay 433 Mhz
   * [ ] Radio capture and replay 868 Mhz
-* [ ] Develop infrared features
-  * [ ] Capture and replay
+* [ ] [WIP] Develop infrared features
+  * [x] Capture and replay
   * [ ] Shutdown TVs
 * [ ] Develop RFID features
   * [ ] Simple scan
@@ -236,7 +238,7 @@ Joystick 1 {
         Button 2: key 36 # --> A = Return
         Button 5: key 37 # --> L = Ctrl
         Button 6: key 54 # --> R = C
-        Button 9: key 65 # --> SELECT = Space
+        Button 9: key 23 # --> SELECT = Tab
         Button 10: key 36 # --> START = Return
         Button 11: Key 111 # --> DOWN = Arrow down
         Button 12: Key 116 # --> UP = Arrow up
@@ -248,7 +250,6 @@ Joystick 1 {
 ## 💡 Inspired by
 
 >This project is mainly a gathering of different fabulous works, including the following:
-
 
 🎨 Main inspiring projects:
 
@@ -270,6 +271,7 @@ Joystick 1 {
 * [List of single pack gba games](https://archive.org/download/nointro.gba-multiboot)
 * [Use blueoothctl with standard and BLE](https://stackoverflow.com/questions/36607626/how-to-use-bluetoothctl-like-hcitool-lescan-to-report-repeated-proximity-beacons)
 * [Raspberry Pi as Bluetooth HID](https://projects-raspberry.com/emulate-a-bluetooth-keyboard-with-the-raspberry-pi/)
+
 
 🚧 Temporary links to test content:
 
