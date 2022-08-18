@@ -188,7 +188,7 @@ The main roadmap is:
   * [x] WiFi hotspot
   * [x] WiFi connect
 * [ ] [WIP] Develop Bluetooth features
-  * [ ] Bluetooth gamepad❗*seems to be difficult*
+  * [ ] Bluetooth gamepad ❗ *seems to be difficult*
   * [x] Bluetooth capture
   * [x] Bluetooth recon
   * [x] BLE recon
@@ -198,13 +198,13 @@ The main roadmap is:
   * [x] Radio hijack simple frequency
   * [x] Radio hijack Traffic Announcement
   * [x] Radio hijack multiple frequencies
-* [ ] Develop 400-900 MHz features
-  * [ ] Radio capture and replay 433 Mhz
+* [ ] [WIP] Develop 400-900 MHz features
+  * [x] Radio capture and replay 433 Mhz
   * [ ] Radio capture and replay 868 Mhz
 * [ ] [WIP] Develop infrared features
   * [x] Capture and replay
   * [ ] Shutdown TVs
-* [ ] Develop RFID features
+* [ ] [WIP] Develop RFID features
   * [ ] Simple scan
   * [ ] Capture and replay
 * [x] Develop stealth mode
@@ -265,16 +265,17 @@ Joystick 1 {
 * [Linux dialog](https://www.geeksforgeeks.org/creating-dialog-boxes-with-the-dialog-tool-in-linux/)
 * [Raspbrery pi documentation](https://www.raspberrypi.com/documentation/computers/configuration.html)
 * [Capture Bluetooth with tcpdump](https://www.agnosticdev.com/content/how-capture-bluetooth-traffic-tcpdump-linux)
-* [Hack radio signals](https://null-byte.wonderhowto.com/how-to/hack-radio-frequencies-hijacking-fm-radio-with-raspberry-pi-wire-0177007/)
-* [Play with IR signals](https://projects-raspberry.com/controlling-your-tv-or-any-infrared-device-with-a-raspberry-pi/)
-* [Play with 433 MHz signals](https://tutorials-raspberrypi.com/control-raspberry-pi-wireless-sockets-433mhz-tutorial/)
-* [List of single pack gba games](https://archive.org/download/nointro.gba-multiboot)
 * [Use blueoothctl with standard and BLE](https://stackoverflow.com/questions/36607626/how-to-use-bluetoothctl-like-hcitool-lescan-to-report-repeated-proximity-beacons)
-* [Raspberry Pi as Bluetooth HID](https://projects-raspberry.com/emulate-a-bluetooth-keyboard-with-the-raspberry-pi/)
-
+* [Raspberry Pi as Bluetooth HID](https://impythonist.wordpress.com/2014/02/01/emulate-a-bluetooth-keyboard-with-the-raspberry-pi/)
+* [Play with 433 radio signals](https://www.instructables.com/RF-433-MHZ-Raspberry-Pi/)
+* [Play with RFID](https://github.com/rgrokett/RFIDReaderPi)
+* [List of single pack gba games](https://archive.org/download/nointro.gba-multiboot)
 
 🚧 Temporary links to test content:
 
 * <https://github.com/quangthanh010290/keyboard_mouse_emulate_on_raspberry>
 * <https://gist.github.com/ukBaz/a47e71e7b87fbc851b27cde7d1c0fcf0>
-* <https://github.com/sezanzeb/input-remapper/>
+* <https://github.com/007durgesh219/BTGamepad>
+* <https://bbs.archlinux.org/viewtopic.php?id=201672>
+* <https://github.com/gh4ck3r/hid2bt>
+
