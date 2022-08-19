@@ -29,7 +29,7 @@ time_update() {
 
 # Set main parameters
 set_var() {
-    CONFIG_FILE="assets/conf/gbadrive.conf"
+    CONFIG_FILE="/opt/gbadrive/assets/conf/gbadrive.conf"
 
     if [ -f $CONFIG_FILE ] ; then
         source $CONFIG_FILE
@@ -109,10 +109,10 @@ execute_fm_rds() {
 }
 
 execute_fm_rds_ta() {
-    cmd="$FM_RDS -freq 107.7 -ctl $CONF_DIR/rds_ctl -audio $MUSIC_DIR/noise.wav"
+    cmd="$FM_RDS -freq 107.7 -ctl $CONF_DIR/rds_ctl -audio $MUSIC_DIR/msg_broadcast.wav"
     log "Execute $cmd"
     log "Ctrl-C to abort"
-    ssh pi@localhost $FM_RDS -freq 107.7 -ctl $CONF_DIR/rds_ctl -audio $MUSIC_DIR/noise.wav
+    ssh pi@localhost $FM_RDS -freq 107.7 -ctl $CONF_DIR/rds_ctl -audio $MUSIC_DIR/msg_broadcast.wav
     log "Kill pi_fm_rds"
     sudo killall pi_fm_rds
 }
@@ -126,7 +126,7 @@ execute_ir_capture(){
         ir-ctl --device=/dev/lirc1 --mode2 --receive=$capture_file -1
     else
         log_error "IR module does not seem to be enabled"
-        dialog --title "Error" --msgbox "\nIR module does not seem to be enabled\nYou can enable it in 'System' menu" \
+        dialog --title "Error" --msgbox "\nIR module does not seem to be enabled: you can enable it in 'System' menu" \
         $WIN_HEIGHT $WIN_WIDTH
     fi
 }
@@ -140,11 +140,12 @@ execute_ir_replay(){
         ir-ctl --device=/dev/lirc0 -s $repeat_signal
     else
         log_error "IR module does not seem to be enabled"
-        dialog --title "Error" --msgbox "\nIR module does not seem to be enabled\nYou can enable it in 'System' menu" \
+        dialog --title "Error" --msgbox "\nIR module does not seem to be enabled: you can enable it in 'System' menu" \
         $WIN_HEIGHT $WIN_WIDTH
     fi
 }
 
+# TT for Thirty Three / 433
 execute_tt_capture() {
     cmd="python3 $TT_RECEIVE -o $capture_file"
     log "Execute $cmd"
@@ -152,7 +153,7 @@ execute_tt_capture() {
 
     if [ $? -ne 0 ] ; then
         log_error "433 RF module does not seem to be enabled"
-        dialog --title "Error" --msgbox "\n433 RF module does not seem to be enabled\nYou can enable it in 'System' menu" \
+        dialog --title "Error" --msgbox "\n433 RF module does not seem to be enabled: you can enable it in 'System' menu" \
         $WIN_HEIGHT $WIN_WIDTH
     fi
 }
@@ -166,7 +167,7 @@ execute_tt_replay() {
 
     if [ $? -ne 0 ] ; then
         log_error "433 RF module does not seem to be enabled"
-        dialog --title "Error" --msgbox "\n433 RF module does not seem to be enabled\nYou can enable it in 'System' menu" \
+        dialog --title "Error" --msgbox "\n433 RF module does not seem to be enabled: you can enable it in 'System' menu" \
         $WIN_HEIGHT $WIN_WIDTH
     fi
 }
@@ -479,9 +480,6 @@ action_system() {
         log "Enable RF 433 modules"
 
         # Enable RF modules means disabling IR mod
-        # Make sure to disable it in config.txt also, in case of reboot
-        sed -i "s/^dtoverlay=gpio-ir/#dtoverlay=gpio-ir/g" /boot/config.txt
-        # Disable related mods
         modprobe -r gpio_ir_recv
         modprobe -r gpio_ir_tx
         dialog --title "$NAME" --msgbox "\nRF 433 modules enabled" \
@@ -916,10 +914,10 @@ action_rom() {
     # Kill GBA streaming
     killall "gbarplay.sh" "raspi.run"
     # Send ROM
-    cmd="$ROM_LOADER '$rom_filepath'"
-    log "Execute $cmd" ; $cmd
-    sleep 10
-    reboot
+    cmd="$ROM_LOADER $rom_filepath"
+    log "Execute $cmd"
+    $ROM_LOADER "$rom_filepath"
+    sleep 10 ; reboot
 }
 
 # Function for dev mode only
@@ -948,6 +946,6 @@ dialog --title "$NAME" --msgbox \
 "\n$(cat $ASCII_DIR/kitty_hi.ascii)\n          Hello buddy =D" \
 $WIN_HEIGHT $WIN_WIDTH
 # Run the oneko tamagotchi
-/usr/games/oneko -tora -tofocus -bg green -position 50 50 &
+nohup /usr/games/oneko -tora -tofocus -bg green -position 50 50 &
 # Run the main menu
 menu
