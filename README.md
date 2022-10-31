@@ -2,31 +2,25 @@
 
 Hack stuff with your Game Boy !
 
-
-🎮 GBA Drive is a tool which runs on a Raspberry Pi Zero W connected to a Game Boy Advance.
+🎮 GBA Drive is a tool which runs on a Raspberry Pi Zero W connected to a Game Boy Advance.  
 Different wireless transceivers are connected to it in order to play with wireless protocols 🎮
 
-![gba_menu_1.jpg](share/pictures/gba_menu_1.jpg)
+## ![gba_menu_1.jpg](./share/pictures/gba_menu_1.jpg)🏹 Features
 
-## 🏹 Features
-
-The beauty in the Game Boy Advance is that the console let you upload and run any code sent by the link cable. You can send a mini-game or data for multiplayer as intended, but you can also send any kind of code understandable by the GBA 😊 This feature let us upload code for streaming the Raspberry Pi screen onto the GBA screen, and get the button hits in return.
+The beauty in the Game Boy Advance is that the console let you upload and run any code sent by the link cable. You can send a mini-game or data for multiplayer as intended, but you can also send any kind of code understandable by the GBA 😊 This feature let us upload code for streaming the Raspberry Pi screen on the GBA screen, and get the button hits in return.
 
 Now we will use the ability of the Raspberry Pi Zero and the GBA screen and gamepad to play with wireless protocols, just like a handmade [Flipper Zero](https://flipperzero.one/) !
 
-
->The GBA Drive project is a gathering of many super cool projects. I did no produce much work but mainly configuration and tweaking. See below the different projects I took. The code developed for the GBA Drive project is a clean interface whose purpose is to automate and make all these different projects work together =)
-
+> The GBA Drive project is a gathering of many super cool projects. I did no produce much work but mainly configuration and tweaking. See below the different projects I took. The code developed for the GBA Drive project is a clean interface whose purpose is to automate and make all these different projects work together =)
 
 ### 📶 Capabilities
 
-The main goal is to gather different following wireless features.
+The main goal is to gather the different following wireless features.
 
 * WiFi - 2.4 GHz
   * WiFi capture
   * WiFi deauth and capture handshake
   * WiFi password sniffer
-  * WiFi DNS scan
   * WiFi hotspot
   * WiFi connect default AP
 * Bluetooth - 2.4 GHz
@@ -64,13 +58,9 @@ The main goal is to gather different following wireless features.
 
 ## Screenshots
 
-![welcome.jpg](share/pictures/welcome.jpg)
+![welcome.jpg](./share/pictures//welcome.jpg) ![menu_wifi.jpg](./share/pictures/menu_wifi.jpg) ![menu_radio.jpg](./share/pictures/menu_radio.jpg)
 
-![menu_wifi.jpg](share/pictures/menu_wifi.jpg)
-
-![menu_wifi.jpg](share/pictures/menu_radio.jpg)
-
-## 🔧 Hardware
+🔧 Hardware
 
 Here is the harware used for GBA Drive.
 
@@ -111,7 +101,7 @@ A simple Game Boy with a **GBC** link cable is needed, but I wanted an ultimate 
 
 ### Soldering
 
-Installation of a new IPS screen with 3 wires which will be soldered to the L, R and SELECT buttons. Pushing those buttons will decrease or increse screen luminosity.
+Installation of a new IPS screen with 3 wires soldered to the L, R and SELECT buttons. Pushing those buttons will decrease or increse screen luminosity.
 
 Soldering of a new amp and a new speaker.
 
@@ -127,13 +117,7 @@ Further steps:
 * the space left on the piece of wood will handle RFID and IR transmitters;
 * the WiFi dongle will be fixed on the sleeve.
 
-![gba_opened_3.jpg](share/pictures/gba_opened_3.jpg)
-
-![gba_opened_4.jpg](share/pictures/gba_opened_4.jpg)
-
-![gba_drive_back.jpg](share/pictures/gba_drive_back.jpg)
-
-![gba_menu_1.jpg](share/pictures/gba_menu_2.jpg)
+![gba_opened_3.jpg](./share/pictures/gba_opened_3.jpg) ![gba_opened_4.jpg](./share/pictures/gba_opened_4.jpg) ![gba_drive_back.jpg](./share/pictures/gba_drive_back.jpg) ![gba_menu_2.jpg](./share/pictures/gba_menu_2.jpg)
 
 You can see work in progress on the last picture (cursor wasn't removed yet, Raspberry Pi not attached, keyboard connected for testing)
 
@@ -162,10 +146,10 @@ SSH Password: gbadrive
 
 GBA Drive uses different files:
 
-1. *gbatools.sh:* the entry point and display the menu on the GBA;
-2. *assets*\: the directory for external assets like ascii arts or radio frequency lists;
+1. *gbatools.sh*\: the entry point and display the menu on the GBA;
+2. *assets*\: the directory for assets like configuration files, ascii arts or radio frequency lists;
 3. *share*\: the directory which will be copied in $HOME for SMB access and storing default medias (pictures, musics etc.) and network captures;
-4. *INSTALL.md:* the process for installing GBA Drive project on Raspberry Pi + Game Boy Advance;
+4. *INSTALL.md*\: the process for installing GBA Drive project on Raspberry Pi + Game Boy Advance;
 5. *README.md*\: seriously ?
 
 ## 🗺️ Roadmap
@@ -184,11 +168,10 @@ The main roadmap is:
   * [x] WiFi deauth
   * [x] WiFi capture
   * [x] WiFi password sniffer
-  * [x] WiFi DNS scan
   * [x] WiFi hotspot
   * [x] WiFi connect
 * [ ] [WIP] Develop Bluetooth features
-  * [ ] Bluetooth gamepad ❗ *seems to be difficult*
+  * [ ] Bluetooth gamepad
   * [x] Bluetooth capture
   * [x] Bluetooth recon
   * [x] BLE recon
@@ -198,13 +181,13 @@ The main roadmap is:
   * [x] Radio hijack simple frequency
   * [x] Radio hijack Traffic Announcement
   * [x] Radio hijack multiple frequencies
-* [ ] [WIP] Develop 400-900 MHz features
+* [x] Develop 400-900 MHz features
   * [x] Radio capture and replay 433 Mhz
-  * [ ] Radio capture and replay 868 Mhz
+  * [x] Radio capture and replay 868 Mhz
 * [ ] [WIP] Develop infrared features
   * [x] Capture and replay
-  * [ ] Shutdown TVs
-* [ ] [WIP] Develop RFID features
+  * [ ] Shutdown TVs ❗ not trivial (must adapt codes loaded for ESP32 in C)
+* [ ] Develop RFID features
   * [ ] Simple scan
   * [ ] Capture and replay
 * [x] Develop stealth mode
@@ -216,7 +199,7 @@ The main roadmap is:
 ### 💽 Version stages
 
 * [x] [Version 1.0] Network configuration and WiFi features implemented
-* [x] [Version 1.1] GBA Connected, Kitty, GBA ROM loader, BT and FM radio features impelmented
+* [x] [Version 1.1] GBA Connected, Kitty, GBA ROM loader, BT and FM radio features implemented
 * [ ] [Version 1.2] RFID, 433, 868 and infrared implemented
 
 ### ✅ Micro todo
@@ -224,6 +207,7 @@ The main roadmap is:
 Short terms tasks to complete:
 
 * [ ] See how to display fun wave animation while running captures or hijacks
+* [ ] Display codes / strings received by radio
 
 ## The GBA gamepad
 
@@ -249,14 +233,13 @@ Joystick 1 {
 
 ## 💡 Inspired by
 
->This project is mainly a gathering of different fabulous works, including the following:
+> This project is mainly a gathering of different fabulous works, including the following.
 
 🎨 Main inspiring projects:
 
 * [GBA remote play](https://github.com/rodri042/gba-remote-play)
 * [GBA multiboot python](https://github.com/bartjakobs/GBA-Multiboot-Python)
 * [Flipper Zero](https://flipperzero.one/)
-* [Pwnagotchi](https://pwnagotchi.ai/)
 * [Project Pita](https://www.evilsocket.net/2018/07/28/Project-PITA-Writeup-build-a-mini-mass-deauther-using-bettercap-and-a-Raspberry-Pi-Zero-W/)
 * [Pi FM RDS](https://github.com/ChristopheJacquet/PiFmRds)
 
@@ -268,7 +251,7 @@ Joystick 1 {
 * [Use blueoothctl with standard and BLE](https://stackoverflow.com/questions/36607626/how-to-use-bluetoothctl-like-hcitool-lescan-to-report-repeated-proximity-beacons)
 * [Raspberry Pi as Bluetooth HID](https://impythonist.wordpress.com/2014/02/01/emulate-a-bluetooth-keyboard-with-the-raspberry-pi/)
 * [Play with 433 radio signals](https://www.instructables.com/RF-433-MHZ-Raspberry-Pi/)
-* [Play with RFID](https://github.com/rgrokett/RFIDReaderPi)
+* [Play with 868 Lora signals](https://shop.sb-components.co.uk/blogs/posts/getting-started-with-lora-hat-for-raspberry-pi)
 * [List of single pack gba games](https://archive.org/download/nointro.gba-multiboot)
 
 🚧 Temporary links to test content:
@@ -278,4 +261,4 @@ Joystick 1 {
 * <https://github.com/007durgesh219/BTGamepad>
 * <https://bbs.archlinux.org/viewtopic.php?id=201672>
 * <https://github.com/gh4ck3r/hid2bt>
-
+* <https://learn.adafruit.com/tv-b-gone-kit/design-notes>
