@@ -1,14 +1,13 @@
-#!/usr/bin/env python3
-
 import argparse
 import logging
 
 from rpi_rf import RFDevice
 
 logging.basicConfig(level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S',
-                    format='%(asctime)-15s - [%(levelname)s] %(module)s: %(message)s',)
+                    format='%(asctime)-15s - [%(levelname)s] %(module)s: %(message)s')
 
-parser = argparse.ArgumentParser(description='Sends a decimal code via a 433/315MHz GPIO device')
+parser = argparse.ArgumentParser(description='Sends a decimal code via a 433 MHz GPIO device')
+
 parser.add_argument('code', metavar='CODE', type=int,
                     help="Decimal code to send")
 parser.add_argument('-g', dest='gpio', type=int, default=17,
