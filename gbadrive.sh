@@ -2,7 +2,7 @@
 
 # GBA Drive
 # By Valou Tweak
-# 2022 v1.1
+# 2022 v1.2
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@
 # =======================================================================================
 # ======================================= Helpers =======================================
 # =======================================================================================
+
+
+# TODO: try the SCL3711 RFID sensor
+# TODO: empty large log files in /var/log
 
 # Set timestamp
 time_update() {
@@ -102,7 +106,7 @@ execute_bettercap() {
 execute_fm_rds() {
     cmd="$FM_RDS -freq $frq -ps PiRaDio -rt HackedByAGameBoy -audio $song"
     log "Execute $cmd"
-    log "Ctrl-C to abort"
+    log "L+R to abort"
     ssh pi@localhost $FM_RDS -freq $frq -ps PiRaDio -rt HackedByAGameBoy -audio $song
     log "Kill pi_fm_rds"
     sudo killall pi_fm_rds
@@ -111,7 +115,7 @@ execute_fm_rds() {
 execute_fm_rds_ta() {
     cmd="$FM_RDS -freq 107.7 -ctl $CONF_DIR/rds_ctl -audio $MUSIC_DIR/msg_broadcast.wav"
     log "Execute $cmd"
-    log "Ctrl-C to abort"
+    log "L+R to abort"
     ssh pi@localhost $FM_RDS -freq 107.7 -ctl $CONF_DIR/rds_ctl -audio $MUSIC_DIR/msg_broadcast.wav
     log "Kill pi_fm_rds"
     sudo killall pi_fm_rds
@@ -119,7 +123,7 @@ execute_fm_rds_ta() {
 
 execute_ir_capture(){
     # Test if gpio_ir_recv mod is enabled
-    lsmod | grep "gpio_ir_recv"
+    lsmod | grep "gpio_ir_recv" >/dev/null
     if [ $? -eq 0 ] ; then
         cmd="ir-ctl --device=/dev/lirc1 --mode2 --receive=$capture_file -1"
         log "Execute $cmd"
@@ -147,7 +151,7 @@ execute_ir_replay(){
 
 # TT for Thirty Three / 433
 execute_tt_capture() {
-    cmd="python3 $TT_RECEIVE -o $capture_file"
+    cmd="$TT_RECEIVE -o $capture_file"
     log "Execute $cmd"
     $TT_RECEIVE -o $capture_file
 
@@ -163,6 +167,8 @@ execute_tt_replay() {
     pulselength=$(cut -d ";" -f 2 $repeat_signal)
     potocol=$(cut -d ";" -f 3 $repeat_signal)
 
+    cmd="$TT_SEND -p $pulselength -t $protocol $code"
+    log "Execute $cmd"
     $TT_SEND -p $pulselength -t $protocol $code
 
     if [ $? -ne 0 ] ; then
@@ -172,12 +178,25 @@ execute_tt_replay() {
     fi
 }
 
+execute_lora_capture() {
+    cmd="$LORA_RECEIVE -o $capture_file"
+    log "Execute $cmd"
+    $LORA_RECEIVE -o $capture_file
+}
+
+execute_lora_replay() {
+    cmd="$LORA_SEND -f $repeat_signal"
+    log "Execute $cmd"
+    $LORA_SEND -f $repeat_signal
+}
+
 check_adapter() {
     ifconfig $WLAN1
     return $?
 }
 
-# monitor_mode [enable | disable]: manage monitor mode of external interface
+# Manage monitor mode of external interface
+# monitor_mode [enable | disable]
 monitor_mode() {
     # Check if the required parameter is specified
     if [ $# -ne 1 ] ; then
@@ -199,11 +218,14 @@ monitor_mode() {
         dialog --title "Error" --msgbox "\nAdapter $WLAN1 is not present" \
         $WIN_HEIGHT $WIN_WIDTH
         menu
+    else
+        log "Chack: adapter $WLAN1 is present"
     fi
 
     # Enable wlan1 monitor mode
     if [ $mode == "enable" ] ; then
         # Log debug information
+        log "Enable monitor mode on $WLAN1"
         log "Debug sys info: \n$(ifconfig)\n"
         # Enable monitor while interface is down
         ifconfig $WLAN1 down
@@ -213,6 +235,7 @@ monitor_mode() {
 
     # Disable wlan1 monitor mode
     if [ $mode == "disable" ] ; then
+        log "Enable monitor mode on $WLAN1"
         ifconfig $WLAN1 down
         iwconfig $WLAN1 mode managed
         ifconfig $WLAN1 up
@@ -232,22 +255,14 @@ run_action() {
     authorized_actions=("action_wifi","action_bluetooth","action_radio","action_ir","action_rfid","action_rom","action_system","action_wip")
     # If the action is one of the authorized, then proceed
     if [ "$(echo $authorized_actions | grep -w -o $action)" == "$action" ] ; then
-        case $return in
-        0)
-            #echo "'$choice' chosen"
+        if [ $return -eq 0 ] ; then
             # Run the specified action
-            $action ;;
-        1)
-            # Cancel pressed
-            menu ;;
-        255)
-            # ESC pressed
-            clear && exit 1 ;;
-        esac
+            $action
+        fi
     else
         log_error "Cannot recognize selected action: $action"
-        menu
     fi
+    menu
 }
 
 # =======================================================================================
@@ -277,19 +292,10 @@ menu() {
 	return=$?
 	choice=`cat $tmpfile`
 
-	case $return in
-        0)
-    	    #echo "'$choice' chosen"
-    	    selected ;;
-        1)
-    	    # Cancel pressed
-            log "Cancel pressed, exiting"
-    	    clear && exit 1 ;;
-        255)
-    	    # ESC pressed
-            log "ESC pressed, exiting"
-    	    clear && exit 1 ;;
-	esac
+	if [ $return -eq 0 ] ; then
+        selected
+    fi
+    menu
 }
 
 # =======================================================================================
@@ -307,7 +313,7 @@ selected () {
             1 "[$WLAN0] Connect to default AP" \
             2 "[$WLAN1] Create hotspot" \
             3 "[$WLAN1] Deauth attack" \
-            4 "[$WLAN1] Capture passwords" \
+            4 "[$WLAN1] Recon & pwd capture" \
             5 "[$WLAN1] DNS scan" \
             6 "[$WLAN1] Capture network" 2> $tmpfile
 
@@ -374,7 +380,7 @@ selected () {
             return=$?
             choice=`cat $tmpfile`
 
-            run_action action_wip ;;
+            run_action action_rfid ;;
         6)
             # GBA ROM Loader
             log "Enter GBA ROM menu"
@@ -383,13 +389,33 @@ selected () {
             # Kitty
             log "Display Kitty"
 
+            # TODO: reduce amount of logs:
+            # https://raspberrypi.stackexchange.com/questions/62533/how-can-i-reduce-the-writing-to-log-files
+
             # Number of ascii file to random on
             file_number=$(ls -1 $ASCII_DIR/*.ascii | wc -l)
             # Select random Kitty
             # (-2 is for the hello and bye bye ascii pictures, we don't want to display them)
-            random_select=$((1+$RANDOM%($file_number-2)))
+
+            # Experience and levels:
+            #   Each time GBA Drive is run and used, it's in the logs
+            #   Each time an appropriate log is seen, it counts as 1 xp
+            #   Each 20 experience points, it counts as 1 level
+            random_select=$((1 + $RANDOM % ($file_number - 2)))
+            base_xp=$(grep "gbadrive.sh" /var/log/kern.{log,log.1} -o | wc -l)
+            # Search also in the passed logfiles (compressed)
+            supp_xp=$(zgrep "gbadrive.sh" /var/log/kern.log.*.gz | wc -l)
+            current_xp=$(($base_xp + supp_xp))
+            level=$((1 + (current_xp / 20)))
+            if [ $current_xp -gt 0 ] ; then
+                progress_bar=${current_xp: -2}
+                progress=$(($progress_bar % 20))
+            else
+                progress=0
+            fi
+
             # Display Kitty
-            dialog  --title "Level: 1 |============........| level 2" \
+            dialog  --title "Level: $level |$(perl -E "print '=' x $(($progress % 20)) ; print '.' x $((20 - ($progress % 20)))")| level $(($level + 1))" \
             --msgbox "$(cat $ASCII_DIR/kitty_$random_select.ascii)" \
             $WIN_HEIGHT $WIN_WIDTH
             menu
@@ -440,8 +466,9 @@ selected () {
             1 "Print logs" \
             2 "Enable IR module" \
             3 "Enable RF 433 modules" \
-            4 "Reboot" \
-            5 "Shutdown" 2> $tmpfile
+            4 "File manager" \
+            5 "Reboot" \
+            6 "Shutdown" 2> $tmpfile
 
             return=$?
             choice=`cat $tmpfile`
@@ -487,6 +514,39 @@ action_system() {
         menu
         ;;
     4)
+        log "Run file manager"
+
+        # Select file
+        dialog --title "Select file" --fselect "$SHARE_DIR" \
+        $WIN_HEIGHT $WIN_WIDTH 2> $tmpfile
+
+        return=$?
+        if [ $return -ne 0 ] ; then
+            menu
+        fi
+        file=$(cat $tmpfile)
+
+        # Ask for action: remove or get infos on the selected file
+        dialog --title "File manager" \
+        --radiolist "Select option:" \ $WIN_HEIGHT $WIN_WIDTH $MENU_HEIGHT \
+        1 "Details" Off \
+        2 "Remove" Off 2> $tmpfile
+
+        return=$?
+        choice=`cat $tmpfile`
+
+        if [ $choice -eq 1 ] ; then
+            # Display file information
+            dialog --title "File manager" --prgbox "File details" "ls -lah $file" \
+            $WIN_HEIGHT $WIN_WIDTH 2> $tmpfile
+        elif [ $choice -eq 2 ] ; then
+            # Remove file
+            rm "$file"
+            dialog --title "$NAME" --msgbox "\n$file deleted" \
+            $WIN_HEIGHT $WIN_WIDTH
+        fi
+        ;;
+    5)
         # Reboot
         log "Reboot pressed"
         clear;
@@ -494,7 +554,7 @@ action_system() {
         $WIN_HEIGHT $WIN_WIDTH
         clear ; reboot
         ;;
-    5)
+    6)
         # Exit
         log "Shutdown pressed"
         clear;
@@ -514,7 +574,7 @@ action_wifi() {
     time_update
     case $choice in
 		1)
-            log "Connect to default WiFi AP"
+            clear ; log "Connect to default WiFi"
 
             # Turn WiFi on via internal wlan0
             # Reset dns
@@ -548,9 +608,6 @@ action_wifi() {
             dialog --title "Hotspot" --msgbox \
             "\nRunning WiFi hotspot:\n\n SSID: GBA Drive\n WPA: gbadrive" \
             $WIN_HEIGHT $WIN_WIDTH
-            # Shutdown hotspot and external wlan1 interface
-            systemctl stop hostapd
-            ifconfig $WLAN1 down
             ;;
 		3)
             log "Run WiFi deauth attack"
@@ -568,46 +625,34 @@ action_wifi() {
             monitor_mode disable
             ;;
         4)
-            log "Run WiFi password sniffer"
+            log "Run WiFi recon and password sniffer"
 
-            # Set external interface wlan1 to monitor mode
-            clear ; monitor_mode enable
             # Then run deauth attack via bettercap
             caplet="/usr/local/share/bettercap/caplets/simple-passwords-sniffer.cap"
-            execute_bettercap
+            clear ; execute_bettercap
 
-            dialog --title "Password sniffer" --msgbox \
-            "\nPassword sniffer stopped" $WIN_HEIGHT $WIN_WIDTH
-            # Disable monitor mode
-            monitor_mode disable
+            dialog --title "Recon & pwd capture" --msgbox \
+            "\nRecon & pwd capture stopped" $WIN_HEIGHT $WIN_WIDTH
             ;;
 
         5)
             log "Run DNS scan"
 
-            # Set external interface wlan1 to monitor mode
-            clear ; monitor_mode enable
             clear ; execute_tshark
 
             dialog --title "Password sniffer" --msgbox \
             "\nDNS scan stopped" $WIN_HEIGHT $WIN_WIDTH
-            # Disable monitor mode
-            monitor_mode disable
             ;;
         6)
             log "Run WiFi capture"
 
-            # Set external interface wlan1 to monitor mode
-            clear ; monitor_mode enable
             # Start capture
             capture_file="$SHARE_DIR/captures/wifi_capture_$NOW_FFORMAT.pcapng"
             # Need to be touch, if not dumpcap has no right (bug ?)
             touch $capture_file
-            execute_dumpcap
+            clear ; execute_dumpcap
 
             dialog --title "Network capture" --msgbox "\nCapture stopped" $WIN_HEIGHT $WIN_WIDTH
-            # Disable monitor mode
-            monitor_mode disable
             ;;
     esac
 
@@ -760,7 +805,7 @@ action_radio() {
 
             # Capture radio signal
             capture_file="$SHARE_DIR/captures/tt_capture_$NOW_FFORMAT.txt"
-            clear ; log "Wait for 433 MHz signal or Ctrl-C to abort"
+            clear ; log "Wait for 433 MHz signal or L+R to abort"
             execute_tt_capture
 
             dialog --title "[433 MHz] Capture signal" --msgbox \
@@ -788,6 +833,10 @@ action_radio() {
             log "[868 MHz] Capture signal"
 
             # Capture radio signal
+            capture_file="$SHARE_DIR/captures/lora_capture_$NOW_FFORMAT.txt"
+            clear ; log "Wait for 868 MHz signal or L+R to abort"
+            execute_lora_capture
+
             dialog --title "[868 MHz] Capture signal" --msgbox \
             "\nCapture stopped" $WIN_HEIGHT $WIN_WIDTH
             ;;
@@ -795,6 +844,18 @@ action_radio() {
             log "[868 MHz] Replay signal"
 
             # Choose signal to repeat
+            dialog --title "Select file" --fselect "$SHARE_DIR/captures" \
+            $WIN_HEIGHT $WIN_WIDTH 2> $tmpfile
+
+            return=$?
+            if [ $return -ne 0 ] ; then
+                menu
+            fi
+            repeat_signal=$(cat $tmpfile)
+
+            # Replay radio signal
+            clear ; execute_lora_replay
+
             dialog --title "Select file" --fselect "$SHARE_DIR/captures" \
             $WIN_HEIGHT $WIN_WIDTH 2> $tmpfile
 
@@ -822,7 +883,7 @@ action_ir() {
 
             # Start capture
             capture_file="$SHARE_DIR/captures/ir_capture_$NOW_FFORMAT.txt"
-            clear ; log "Press any IR key or Ctrl-C to abort"
+            clear ; log "Press any IR key or L+R to stop"
             execute_ir_capture
 
             dialog --title "Infrared capture" --msgbox \
@@ -849,7 +910,7 @@ action_ir() {
         3)
             log "Shutdown TVs"
             dialog --title "Shutdown TVs" --msgbox \
-            "\nReady to shoot them all? \nWork in progress, sorry..." \
+            "\nReady to shoot them all?\nWork in progress..." \
             $WIN_HEIGHT $WIN_WIDTH
             ;;
     esac
@@ -862,14 +923,18 @@ action_ir() {
 action_rfid() {
     case $choice in
 		1)
-            log "RFID scan"
+            log "RFID scan with i2cdump"
+
+            # '1' is the first i2c bus (and the only one here)
+            # '0x28' is the implemented address of the RFID2 M5Stack sensor
+            watch -n 0.5 'echo "L+R to stop\n" ; i2cdump -y 1 0x28'
             dialog --title "RFID scan" --msgbox \
-            "\nScanning RFID..." $WIN_HEIGHT $WIN_WIDTH
+            "\nScan stopped" $WIN_HEIGHT $WIN_WIDTH
             ;;
         2)
             log "RFID capture"
             dialog --title "RFID capture" --msgbox \
-            "\nCapturing RFID..." $WIN_HEIGHT $WIN_WIDTH
+            "\nCapturing RFID...\nWork in progress..." $WIN_HEIGHT $WIN_WIDTH
             ;;
         3)
             log "RFID replay"
@@ -884,7 +949,7 @@ action_rfid() {
             repeat_signal=$(cat $tmpfile)
             # Replay radio signal
             dialog --title "RFID replay" --msgbox \
-            "\nReplaying RFID..." $WIN_HEIGHT $WIN_WIDTH
+            "\nReplaying RFID...\nWork in progress..." $WIN_HEIGHT $WIN_WIDTH
             ;;
     esac
 
@@ -946,6 +1011,6 @@ dialog --title "$NAME" --msgbox \
 "\n$(cat $ASCII_DIR/kitty_hi.ascii)\n          Hello buddy =D" \
 $WIN_HEIGHT $WIN_WIDTH
 # Run the oneko tamagotchi
-nohup /usr/games/oneko -tora -tofocus -bg green -position 50 50 &
+nohup /usr/games/oneko -tora -tofocus -bg green &
 # Run the main menu
 menu
