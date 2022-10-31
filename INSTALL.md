@@ -23,7 +23,7 @@ sudo apt update && sudo apt upgrade
 **Dependencies**
 
 ```
-sudo apt install build-essential libpcap-dev libusb-1.0-0-dev libnetfilter-queue-dev git avahi-daemon pulseaudio-module-bluetooth golang dnsmasq bridge-utils python3-dbus python-gi-dev pulseaudio-module-zeroconf python2.7 python2-dev oneko tshark sox tcpdump samba expect aircrack-ng
+sudo apt install build-essential libpcap-dev libusb-1.0-0-dev libnetfilter-queue-dev git avahi-daemon pulseaudio-module-bluetooth golang dnsmasq bridge-utils python3-dbus python-gi-dev pulseaudio-module-zeroconf python2.7 python2-dev oneko tshark sox tcpdump samba expect aircrack-ng lirc libbluetooth-dev i2c-tools
 ```
 
 **Create python2.7 link for btnap**
@@ -37,7 +37,8 @@ sudo ln -s /usr/bin/python2.7 /usr/bin/python2
 ```
 wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
 sudo python2 get-pip.py
-sudo python2.7 -m pip install dbus-sudo python3 -m pip install wiringpi
+sudo python2.7 -m pip install dbus-python
+sudo python3 -m pip install wiringpi rpi-rf pybluez evdev dbus-python
 ```
 
 **Clear dependencies**
@@ -164,7 +165,7 @@ bluetoothctl
 > quit
 ```
 
-## Setup for WiFI hacking
+## Setup for WiFi hacking
 
 **Update OUI database for aircrack-ng**
 
@@ -215,7 +216,8 @@ sed -i "s/passwords\.cap/\/home\/pi\/Share\/captures\/capture_passwords.cap/g" u
 ```
 cd /opt
 sudo git clone https://github.com/ChristopheJacquet/PiFmRds.git
-cd PiFmRds/src
+sudo mv PiFmRds pi_fm_rds
+cd pi_fm_rds/src
 ```
 
 **Tweak the** *pi_fm_rds.c* **file to exploit full raspi capabilities**
@@ -236,8 +238,8 @@ carrier_freq < 1e6 || carrier_freq > 250e6
 
 ```
 sudo make clean
-sudo make 
-sudo mv pi_fm_rds /opt/PiFmRds/
+sudo make
+sudo mv pi_fm_rds /opt/pi_fm_rds/
 ```
 
 ## Setup Samba server
@@ -245,7 +247,8 @@ sudo mv pi_fm_rds /opt/PiFmRds/
 ```
 SMB_DIR="/home/pi/Share"
 mkdir $SMB_DIR
-sudo chmod 777 $SMB_DIR
+sudo chown -R pi:pi $SMB_DIR
+sudo chmod 0777 $SMB_DIR
 ```
 
 **Edit the SMB configuration file in** */etc/samba/smb.conf*
@@ -269,18 +272,37 @@ sudo systemctl restart smbd
 sudo systemctl enable smbd
 ```
 
+## Setup for Lirc - Infrared module
+
+**Install lirc and disable on boot**
+
+```
+sudo apt install lirc
+sudo systemctl disable lircd
+```
+
+**Edit the file** */boot/config.txt* **and add the following lines**
+
+```
+dtoverlay=gpio-ir,gpio_pin=27
+dtoverlay=gpio-ir-tx,gpio_pin=17
+```
+
 ## Setup for GBA Drive
 
 **Install GBA Drive**
 
 ```
 cd /opt/
-git clone https://github.com/valou8709/gbadrive.git
+sudo git clone https://github.com/valou8709/gbadrive.git
 echo "alias gbadrive='sudo xterm -fn fixed -fullscreen /opt/gbadrive/gbadrive.sh'" >> /home/pi/.bashrc
 sudo chmod 744 /opt/gbadrive/gbadrive.sh /opt/gbadrive/assets/scripts/*
 source /home/pi/.bashrc
 cp -r /opt/gbadrive/share/* /home/pi/Share/
+sudo chown -R 0777 /home/pi/Share
 ```
+
+**Put dialog configuration file .dialogrc in** */opt/gbadrive*
 
 **Run GBADrive at startup as a graphical program**
 
@@ -296,7 +318,7 @@ Exec=sudo xterm -fn fixed -fullscreen -e /opt/gbadrive/gbadrive.sh
 
 ```
 [Desktop Entry]
-Name=QJoyPad 
+Name=QJoyPad
 Exec=qjoypad gbadrive                                             
 ```
 
@@ -328,7 +350,7 @@ framebuffer_width=240
 framebuffer_height=160
 ```
 
-**Run raspi-config and enable SPI interface then reboot**
+**Run raspi-config and enable SPI, Serial and I2C interfaces then reboot**
 
 ```
 sudo raspi-config
@@ -338,17 +360,18 @@ sudo raspi-config
 
 ```
 cd /opt/
-sudo mkdir gba-remote-play && cd gba-remote-play
+sudo mkdir gba_remote_play && cd gba_remote_play
 sudo wget https://github.com/rodri042/gba-remote-play/releases/download/v1.1/gba-remote-play.zip
 sudo unzip gba-remote-play.zip
 sudo rm gba-remote-play.zip
-sudo chmod +x gbarplay.sh multiboot.tool raspi.run 
+sudo chmod +x gbarplay.sh multiboot.tool raspi.run
 ```
 
-**Add the following line in** */etc/rc.local* **before** *exit 0* **to run streaming at startup**
+**Add the following line after running** `sudo crontab -e` **to run streaming at startup**
 
 ```
-/opt/gba-remote-play/gbarplay.sh &
+# Start GBA Streaming at boot
+@reboot sleep 5 ; /opt/gba_remote_play/gbarplay.sh &
 ```
 
 **Install and check WiringPi**
@@ -371,7 +394,7 @@ Joystick 1 {
         Button 2: key 36
         Button 5: key 37
         Button 6: key 54
-        Button 9: key 65
+        Button 9: key 23
         Button 10: key 36
         Button 11: Key 111
         Button 12: Key 116
@@ -384,5 +407,6 @@ Joystick 1 {
 
 ```
 cd /opt/
-git clone https://github.com/bartjakobs/GBA-Multiboot-Python.git
+sudo git clone https://github.com/bartjakobs/GBA-Multiboot-Python.git
+sudo mv GBA-Multiboot-Python gba_multiboot
 ```
