@@ -68,36 +68,39 @@ I choose to use independant sensors but it could be a good idea to "replace" mos
 
 ### Raspberry Pi list
 
-| **Item** | **Link** | **Cost** |
-|------|------|------|
-| Rasperry Pi Zero W v1.1 | [see here](https://thepihut.com/collections/raspberry-pi/products/raspberry-pi-zero-w) | 5€ |
-| USB WiFi dongle (and cables) | [see here](https://thepihut.com/products/usb-wifi-adapter-for-the-raspberry-pi) | 10€ |
-| Radio 433 Mhz transmitter | [see here](https://thepihut.com/products/rf-unit-433mhz-transmitter-syn115) | 10€ |
-| Radio 868 Mhz transmitter | [see here](https://thepihut.com/products/lorawan-unit-868mhz-asr6501-with-antenna) | 15€ |
-| Infrared 38 Khz transmitter | [see here](https://thepihut.com/products/ir-unit) | 5€ |
-| RFID / NFC 13.56 Mhz transmitter | [see here](https://thepihut.com/products/m5stack-rfid-unit-2-ws1850s) | 5€ |
-| PiSugar battery kit | [see here](https://www.pisugar.com/) | 40€ |
-| **Total cost** | **N/A** | **90€** |
+| **Item**                         | **Link**                                                                               | **Cost** |
+|----------------------------------|----------------------------------------------------------------------------------------|----------|
+| Rasperry Pi Zero W v1.1          | [see here](https://thepihut.com/collections/raspberry-pi/products/raspberry-pi-zero-w) | 5€       |
+| USB WiFi dongle (and cables)     | [see here](https://thepihut.com/products/usb-wifi-adapter-for-the-raspberry-pi)        | 10€      |
+| Radio 433 Mhz transmitter        | [see here](https://thepihut.com/products/rf-unit-433mhz-transmitter-syn115)            | 10€      |
+| Radio 868 Mhz transmitter        | [see here](https://thepihut.com/products/lorawan-unit-868mhz-asr6501-with-antenna)     | 15€      |
+| Infrared 38 Khz transmitter      | [see here](https://thepihut.com/products/ir-unit)                                      | 5€       |
+| RFID / NFC 13.56 Mhz transmitter | [see here](https://thepihut.com/products/m5stack-rfid-unit-2-ws1850s)                  | 5€       |
+| PiSugar battery kit              | [see here](https://www.pisugar.com/)                                                   | 40€      |
+| **Total cost**                   | **N/A**                                                                                | **90€**  |
 
 ### Game Boy Advance list
 
 A simple Game Boy with a **GBC** link cable is needed, but I wanted an ultimate Game Boy Advance for my project ! So I build one with the following hardware:
 
-| **Item** | **Link** | **Cost** |
-|------|------|------|
-| Game Boy Advance black | N/A | 50€ |
-| Link cable | [see here](https://www.ebay.fr/itm/322389578968?hash=item4b0fea94d8:g:zZsAAOSwaB5XoTlr) | 10€ |
-| IPS screen v2 with brightness levels | [see here](https://www.ebay.fr/itm/353457510062?hash=item524bb596ae:g:rhIAAOSw6kdgeAAn) | 50€ |
-| Retrosix cleanamp pro | [see here](https://retrosix.co.uk/CleanAmp-Pro-Audio-Amplifier-Game-Boy-Advance-p331202019) | 20€ |
-| Retrosix speaker 1W | [see here](https://retrosix.co.uk/Game-Boy-Speaker-All-Models-p196598057) | 10€ |
-| Retrosix dehum dehiss (clean voltage) | [see here](https://retrosix.co.uk/Wire-Free-Dehum-Dehiss-Kit-Game-Boy-Advance-p341648607) | 20€ |
-| Retrosix clicky triggers | [see here](https://retrosix.co.uk/Game-Boy-Advance-Clicky-Triggers-p264339432) | 5€ |
-| Button and pad replacements (green) | [see here](https://retrosix.co.uk/Game-Boy-Advance-Buttons-Solid-Green-p238984246) | 15€ |
-| Mineral glass replacement | [see here](https://retrosix.co.uk/GBA-Lens-Original-&-CleanScreen-c72309320) | 15€ |
-| Esthetic parts (stickers, battery case etc.) | [see here](https://retrosix.co.uk/Game-Boy-Advance-Stickers-c64655035) | 5€ |
-| Retrosix cleanjuice battery kit | [see here](https://retrosix.co.uk/CleanJuice-USB-C-Battery-Pack-Game-Boy-Advance-p195931214) | 30€ |
-| GBA sleeve for attaching Raspberry Pi | [see here](https://www.ebay.fr/itm/333874681961) | 8€ |
-| **Total cost** | **N/A** | **238€** |
+| **Item**                              | **Link**                                                                                       | **Cost** |
+|---------------------------------------|------------------------------------------------------------------------------------------------|----------|
+| Game Boy Advance black                | N/A                                                                                            | N/A      |
+| Link cable                            | [see here](https://www.ebay.fr/itm/322389578968?hash=item4b0fea94d8:g:zZsAAOSwaB5XoTlr)        | 5€       |
+| IPS screen v2 with brightness levels  | [see here](https://www.ebay.fr/itm/353457510062?hash=item524bb596ae:g:rhIAAOSw6kdgeAAn)        | 50€      |
+| HDMI Output mod                       | [see here](https://handheldlegend.com/products/game-boy-advance-hdmi-converter)                | 50€      |
+| Retrosix cleanamp pro                 | [see here](https://retrosix.co.uk/CleanAmp-Pro-Audio-Amplifier-Game-Boy-Advance-p331202019)    | 10€      |
+| Retrosix speaker 1W                   | [see here](https://retrosix.co.uk/Game-Boy-Speaker-All-Models-p196598057)                      | 4€       |
+| Retrosix dehum dehiss (clean voltage) | [see here](https://retrosix.co.uk/Wire-Free-Dehum-Dehiss-Kit-Game-Boy-Advance-p341648607)      | 8€       |
+| Retrosix clicky triggers              | [see here](https://retrosix.co.uk/Game-Boy-Advance-Clicky-Triggers-p264339432)                 | 2€       |
+| Retrosix button replacements (green)  | [see here](https://retrosix.co.uk/Game-Boy-Advance-Buttons-Solid-Green-p238984246)             | 5€       |
+| Rretrosix pad replacements (red)      | [see here](https://retrosix.co.uk/Game-Boy-Advance-Rubber-Pads-Red-p193932387)                 | 3€       |
+| Retrosix mineral glass replacement    | [see here](https://retrosix.co.uk/GBA-Lens-Original-&-CleanScreen-c72309320)                   | 4€       |
+| Retrosix stickers                     | [see here](https://retrosix.co.uk/Game-Boy-Advance-Stickers-c64655035)                         | 2€       |
+| Retrosix battery case                 | [see here](https://retrosix.co.uk/Game-Boy-Advance-USB-C-Battery-Cover-Clear-Black-p248831003) | 2€       |
+| Retrosix cleanjuice battery kit       | [see here](https://retrosix.co.uk/CleanJuice-USB-C-Battery-Pack-Game-Boy-Advance-p195931214)   | 40€      |
+| GBA sleeve for attaching Raspberry Pi | [see here](https://www.ebay.fr/itm/333874681961)                                               | 12€      |
+| **Total cost**                        | **N/A**                                                                                        | **197€** |
 
 ### Soldering
 
