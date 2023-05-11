@@ -5,48 +5,55 @@ Hack stuff with your Game Boy !
 🎮 GBA Drive is a tool which runs on a Raspberry Pi Zero W connected to a Game Boy Advance.  
 Different wireless transceivers are connected to it in order to play with wireless protocols 🎮
 
-## ![gba_menu_1.jpg](./share/pictures/gba_menu_1.jpg)🏹 Features
+![set_full.jpg](.attachments.9113680/set_full.jpg)
+
+## 🏹 Features
 
 The beauty in the Game Boy Advance is that the console let you upload and run any code sent by the link cable. You can send a mini-game or data for multiplayer as intended, but you can also send any kind of code understandable by the GBA 😊 This feature let us upload code for streaming the Raspberry Pi screen on the GBA screen, and get the button hits in return.
 
 Now we will use the ability of the Raspberry Pi Zero and the GBA screen and gamepad to play with wireless protocols, just like a handmade [Flipper Zero](https://flipperzero.one/) !
 
-> The GBA Drive project is a gathering of many super cool projects. I did no produce much work but mainly configuration and tweaking. See below the different projects I took. The code developed for the GBA Drive project is a clean interface whose purpose is to automate and make all these different projects work together =)
+::: warn
+The GBA Drive project is a gathering of many super cool projects. I did no produce much work but mainly configuration and tweaking. See below the different projects I took.
+
+The code developed for the GBA Drive project is a clean interface whose purpose is to automate and make all these different projects work together =)
+
+:::
 
 ### 📶 Capabilities
 
 The main goal is to gather the different following wireless features.
 
-* WiFi - 2.4 GHz
+* WiFi - 2.4 GHz 
   * WiFi capture
   * WiFi deauth and capture handshake
   * WiFi password sniffer
   * WiFi hotspot
   * WiFi connect default AP
-* Bluetooth - 2.4 GHz
+* Bluetooth - 2.4 GHz 
   * Bluetooth gamepad via GBA input
   * Bluetooth standard and low energy recon
   * Bluetooth capture
   * Bluetooth hotspot
-* Radio - 1-868 MHz
+* Radio - 1-868 MHz 
   * Radio capture & replay (433 / 868 MHz)
   * Radio FM hijack (1-250 MHz)
   * Radio trafic announcement hijack (107.7 MHz)
-* Infrared - 38 KHz
+* Infrared - 38 KHz 
   * IR capture and replay
   * Shutdown TVs
-* RFID - 13.56 MHz
+* RFID - 13.56 MHz 
   * RFID scan
   * RFID capture and replay
 * Stealth mode
 * Load multiboot GBA games
-* Make a friend, Kitty
+* Make a friend, Kitty 
   * Always here when you need it
   * Level up while exploring the wireless world
 
 ### 🌐 Internal services
 
-* SSH into GBA Drive via multiple networks:
+* SSH into GBA Drive via multiple networks: 
   * Connected to a WiFi AP
   * Generating WiFi hotspot
   * Generating Bluetooth hotspot
@@ -54,13 +61,18 @@ The main goal is to gather the different following wireless features.
 * No authentication at all, exception for SSH
 * By default (at startup), WiFi [wlan0] is running
 
-> Currently, the code is in bash and stream output to the GBA. I hope one day, I will be able to develop the same software as a GBA ROM and sending orders to the Raspberry Pi via the link cable instead of streaming the screen.
+::: info
+Currently, the code is in bash and stream output to the GBA.
 
-## Screenshots
+I hope one day, I will be able to develop the same software as a GBA ROM and sending orders to the Raspberry Pi via the link cable instead of streaming the screen.
 
-![welcome.jpg](./share/pictures//welcome.jpg) ![menu_wifi.jpg](./share/pictures/menu_wifi.jpg) ![menu_radio.jpg](./share/pictures/menu_radio.jpg)
+:::
 
-🔧 Hardware
+## 🖼️ Screenshots
+
+![welcome.jpg](.attachments.9113680/welcome.jpg) ![menu_wifi.jpg](.attachments.9113680/menu_wifi.jpg) ![menu_radio.jpg](.attachments.9113680/menu_radio.jpg)
+
+## 🔧 Hardware
 
 Here is the harware used for GBA Drive.
 
@@ -68,39 +80,36 @@ I choose to use independant sensors but it could be a good idea to "replace" mos
 
 ### Raspberry Pi list
 
-| **Item**                         | **Link**                                                                               | **Cost** |
-|----------------------------------|----------------------------------------------------------------------------------------|----------|
-| Rasperry Pi Zero W v1.1          | [see here](https://thepihut.com/collections/raspberry-pi/products/raspberry-pi-zero-w) | 5€       |
-| USB WiFi dongle (and cables)     | [see here](https://thepihut.com/products/usb-wifi-adapter-for-the-raspberry-pi)        | 10€      |
-| Radio 433 Mhz transmitter        | [see here](https://thepihut.com/products/rf-unit-433mhz-transmitter-syn115)            | 10€      |
-| Radio 868 Mhz transmitter        | [see here](https://thepihut.com/products/lorawan-unit-868mhz-asr6501-with-antenna)     | 15€      |
-| Infrared 38 Khz transmitter      | [see here](https://thepihut.com/products/ir-unit)                                      | 5€       |
-| RFID / NFC 13.56 Mhz transmitter | [see here](https://thepihut.com/products/m5stack-rfid-unit-2-ws1850s)                  | 5€       |
-| PiSugar battery kit              | [see here](https://www.pisugar.com/)                                                   | 40€      |
-| **Total cost**                   | **N/A**                                                                                | **90€**  |
+| **Item** | **Link** | **Cost** |
+|------|------|------|
+| Rasperry Pi Zero W v1.1 | [see here](https://thepihut.com/collections/raspberry-pi/products/raspberry-pi-zero-w) | 5€ |
+| USB WiFi dongle (and cables) | [see here](https://thepihut.com/products/usb-wifi-adapter-for-the-raspberry-pi) | 10€ |
+| Radio 433 Mhz transmitter | [see here](https://thepihut.com/products/rf-unit-433mhz-transmitter-syn115) | 10€ |
+| Radio 868 Mhz transmitter | [see here](https://thepihut.com/products/lorawan-unit-868mhz-asr6501-with-antenna) | 15€ |
+| Infrared 38 Khz transmitter | [see here](https://thepihut.com/products/ir-unit) | 5€ |
+| RFID / NFC 13.56 Mhz transmitter | [see here](https://thepihut.com/products/m5stack-rfid-unit-2-ws1850s) | 5€ |
+| PiSugar battery kit | [see here](https://www.pisugar.com/) | 40€ |
+| **Total cost** | **N/A** | **90€** |
 
 ### Game Boy Advance list
 
 A simple Game Boy with a **GBC** link cable is needed, but I wanted an ultimate Game Boy Advance for my project ! So I build one with the following hardware:
 
-| **Item**                              | **Link**                                                                                       | **Cost** |
-|---------------------------------------|------------------------------------------------------------------------------------------------|----------|
-| Game Boy Advance black                | N/A                                                                                            | N/A      |
-| Link cable                            | [see here](https://www.ebay.fr/itm/322389578968?hash=item4b0fea94d8:g:zZsAAOSwaB5XoTlr)        | 5€       |
-| IPS screen v2 with brightness levels  | [see here](https://www.ebay.fr/itm/353457510062?hash=item524bb596ae:g:rhIAAOSw6kdgeAAn)        | 50€      |
-| HDMI Output mod                       | [see here](https://handheldlegend.com/products/game-boy-advance-hdmi-converter)                | 50€      |
-| Retrosix cleanamp pro                 | [see here](https://retrosix.co.uk/CleanAmp-Pro-Audio-Amplifier-Game-Boy-Advance-p331202019)    | 10€      |
-| Retrosix speaker 1W                   | [see here](https://retrosix.co.uk/Game-Boy-Speaker-All-Models-p196598057)                      | 4€       |
-| Retrosix dehum dehiss (clean voltage) | [see here](https://retrosix.co.uk/Wire-Free-Dehum-Dehiss-Kit-Game-Boy-Advance-p341648607)      | 8€       |
-| Retrosix clicky triggers              | [see here](https://retrosix.co.uk/Game-Boy-Advance-Clicky-Triggers-p264339432)                 | 2€       |
-| Retrosix button replacements (green)  | [see here](https://retrosix.co.uk/Game-Boy-Advance-Buttons-Solid-Green-p238984246)             | 5€       |
-| Rretrosix pad replacements (red)      | [see here](https://retrosix.co.uk/Game-Boy-Advance-Rubber-Pads-Red-p193932387)                 | 3€       |
-| Retrosix mineral glass replacement    | [see here](https://retrosix.co.uk/GBA-Lens-Original-&-CleanScreen-c72309320)                   | 4€       |
-| Retrosix stickers                     | [see here](https://retrosix.co.uk/Game-Boy-Advance-Stickers-c64655035)                         | 2€       |
-| Retrosix battery case                 | [see here](https://retrosix.co.uk/Game-Boy-Advance-USB-C-Battery-Cover-Clear-Black-p248831003) | 2€       |
-| Retrosix cleanjuice battery kit       | [see here](https://retrosix.co.uk/CleanJuice-USB-C-Battery-Pack-Game-Boy-Advance-p195931214)   | 40€      |
-| GBA sleeve for attaching Raspberry Pi | [see here](https://www.ebay.fr/itm/333874681961)                                               | 12€      |
-| **Total cost**                        | **N/A**                                                                                        | **197€** |
+| **Item** | **Link** | **Cost** |
+|------|------|------|
+| Game Boy Advance black | N/A | 50€ |
+| Link cable | [see here](https://www.ebay.fr/itm/322389578968?hash=item4b0fea94d8:g:zZsAAOSwaB5XoTlr) | 10€ |
+| IPS screen v2 with brightness levels | [see here](https://www.ebay.fr/itm/353457510062?hash=item524bb596ae:g:rhIAAOSw6kdgeAAn) | 50€ |
+| Retrosix cleanamp pro | [see here](https://retrosix.co.uk/CleanAmp-Pro-Audio-Amplifier-Game-Boy-Advance-p331202019) | 20€ |
+| Retrosix speaker 1W | [see here](https://retrosix.co.uk/Game-Boy-Speaker-All-Models-p196598057) | 10€ |
+| Retrosix dehum dehiss (clean voltage) | [see here](https://retrosix.co.uk/Wire-Free-Dehum-Dehiss-Kit-Game-Boy-Advance-p341648607) | 20€ |
+| Retrosix clicky triggers | [see here](https://retrosix.co.uk/Game-Boy-Advance-Clicky-Triggers-p264339432) | 5€ |
+| Button and pad replacements (green) | [see here](https://retrosix.co.uk/Game-Boy-Advance-Buttons-Solid-Green-p238984246) | 15€ |
+| Mineral glass replacement | [see here](https://retrosix.co.uk/GBA-Lens-Original-&-CleanScreen-c72309320) | 15€ |
+| Esthetic parts (stickers, battery case etc.) | [see here](https://retrosix.co.uk/Game-Boy-Advance-Stickers-c64655035) | 5€ |
+| Retrosix cleanjuice battery kit | [see here](https://retrosix.co.uk/CleanJuice-USB-C-Battery-Pack-Game-Boy-Advance-p195931214) | 30€ |
+| GBA sleeve for attaching Raspberry Pi | [see here](https://www.ebay.fr/itm/333874681961) | 8€ |
+| **Total cost** | **N/A** | **238€** |
 
 ### Soldering
 
@@ -120,9 +129,9 @@ Further steps:
 * the space left on the piece of wood will handle RFID and IR transmitters;
 * the WiFi dongle will be fixed on the sleeve.
 
-![gba_opened_3.jpg](./share/pictures/gba_opened_3.jpg) ![gba_opened_4.jpg](./share/pictures/gba_opened_4.jpg) ![gba_drive_back.jpg](./share/pictures/gba_drive_back.jpg) ![gba_menu_2.jpg](./share/pictures/gba_menu_2.jpg)
+![gba_opened_3.jpg](.attachments.9113680/gba_opened_3.jpg) ![gba_opened_4.jpg](.attachments.9113680/gba_opened_4.jpg)  ![gba_menu_2.jpg](.attachments.9113680/gba_menu_2.jpg)
 
-You can see work in progress on the last picture (cursor wasn't removed yet, Raspberry Pi not attached, keyboard connected for testing)
+![set_compact.jpg](.attachments.9113680/set_compact.jpg)
 
 ## 🪧 Setup
 
@@ -149,11 +158,11 @@ SSH Password: gbadrive
 
 GBA Drive uses different files:
 
-1. *gbatools.sh*\: the entry point and display the menu on the GBA;
-2. *assets*\: the directory for assets like configuration files, ascii arts or radio frequency lists;
-3. *share*\: the directory which will be copied in $HOME for SMB access and storing default medias (pictures, musics etc.) and network captures;
-4. *INSTALL.md*\: the process for installing GBA Drive project on Raspberry Pi + Game Boy Advance;
-5. *README.md*\: seriously ?
+1. *gbatools.sh*: the entry point and display the menu on the GBA;
+2. *assets*: the directory for assets like configuration files, ascii arts or radio frequency lists;
+3. *share*: the directory which will be copied in $HOME for SMB access and storing default medias (pictures, musics etc.) and network captures;
+4. *INSTALL.md*: the process for installing GBA Drive project on Raspberry Pi + Game Boy Advance;
+5. *README.md*: seriously ?
 
 ## 🗺️ Roadmap
 
@@ -199,12 +208,6 @@ The main roadmap is:
 * [x] Help menu
 * [ ] Level up your Kitty
 
-### 💽 Version stages
-
-* [x] [Version 1.0] Network configuration and WiFi features implemented
-* [x] [Version 1.1] GBA Connected, Kitty, GBA ROM loader, BT and FM radio features implemented
-* [ ] [Version 1.2] RFID, 433, 868 and infrared implemented
-
 ### ✅ Micro todo
 
 Short terms tasks to complete:
@@ -212,7 +215,7 @@ Short terms tasks to complete:
 * [ ] See how to display fun wave animation while running captures or hijacks
 * [ ] Display codes / strings received by radio
 
-## The GBA gamepad
+## 🎮 The GBA gamepad
 
 **With qjoypad, we can use the Gameboy buttons via** */dev/input/js0* **and the following layout**
 
@@ -236,7 +239,10 @@ Joystick 1 {
 
 ## 💡 Inspired by
 
-> This project is mainly a gathering of different fabulous works, including the following.
+::: info
+This project is mainly a gathering of different fabulous works, including the following
+
+:::
 
 🎨 Main inspiring projects:
 

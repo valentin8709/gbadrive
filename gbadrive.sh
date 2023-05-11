@@ -2,7 +2,7 @@
 
 # GBA Drive
 # By Valou Tweak
-# 2022 v1.2
+# 2022 v1.1
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 
 
 # TODO: try the SCL3711 RFID sensor
-# TODO: empty large log files in /var/log
+# TODO : empty large log files in /var/log
 
 # Set timestamp
 time_update() {
@@ -272,13 +272,13 @@ run_action() {
 menu() {
     # Update timestamp
     time_update
-	tmpfile=`tmpfile 2>/dev/null` || tmpfile=/tmp/test$$
-	trap "rm -f $tmpfile" 0 1 2 5 15
-	clear
+    tmpfile=`tmpfile 2>/dev/null` || tmpfile=/tmp/test$$
+    trap "rm -f $tmpfile" 0 1 2 5 15
+    clear
     log "Enter main menu"
-	dialog --clear --backtitle "$NAME" --title "$NAME $VERSION" \
+    dialog --clear --backtitle "$NAME" --title "$NAME $VERSION" \
     --menu "Select option:" $WIN_HEIGHT $WIN_WIDTH $MENU_HEIGHT \
-	1 "WiFi" \
+    1 "WiFi" \
     2 "Bluetooth" \
     3 "Radio" \
     4 "Infrared" \
@@ -289,13 +289,13 @@ menu() {
     9 "Help" \
     10 "System" 2> $tmpfile
 
-	return=$?
-	choice=`cat $tmpfile`
+    return=$?
+    choice=`cat $tmpfile`
 
-	if [ $return -eq 0 ] ; then
+    if [ $return -eq 0 ] ; then
         selected
     fi
-    menu
+    #menu
 }
 
 # =======================================================================================
@@ -543,7 +543,7 @@ action_system() {
             # Remove file
             rm "$file"
             dialog --title "$NAME" --msgbox "\n$file deleted" \
-            $WIN_HEIGHT $WIN_WIDTH
+            $WIN_HEIGHT $WIN_WIDTH 2> $tmpfile
         fi
         ;;
     5)
