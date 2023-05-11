@@ -5,7 +5,7 @@ Hack stuff with your Game Boy !
 🎮 GBA Drive is a tool which runs on a Raspberry Pi Zero W connected to a Game Boy Advance.  
 Different wireless transceivers are connected to it in order to play with wireless protocols 🎮
 
-![set_full.jpg](.attachments.9113680/set_full.jpg)
+![set_full.jpg](./share/pictures/set_full.jpg)
 
 ## 🏹 Features
 
@@ -70,7 +70,7 @@ I hope one day, I will be able to develop the same software as a GBA ROM and sen
 
 ## 🖼️ Screenshots
 
-![welcome.jpg](.attachments.9113680/welcome.jpg) ![menu_wifi.jpg](.attachments.9113680/menu_wifi.jpg) ![menu_radio.jpg](.attachments.9113680/menu_radio.jpg)
+![welcome.jpg](./share/pictures/welcome.jpg) ![menu_wifi.jpg](./share/pictures/menu_wifi.jpg) ![menu_radio.jpg](./share/pictures/menu_radio.jpg)
 
 ## 🔧 Hardware
 
@@ -129,9 +129,9 @@ Further steps:
 * the space left on the piece of wood will handle RFID and IR transmitters;
 * the WiFi dongle will be fixed on the sleeve.
 
-![gba_opened_3.jpg](.attachments.9113680/gba_opened_3.jpg) ![gba_opened_4.jpg](.attachments.9113680/gba_opened_4.jpg)  ![gba_menu_2.jpg](.attachments.9113680/gba_menu_2.jpg)
+![gba_opened_3.jpg](./share/pictures/gba_opened_3.jpg) ![gba_opened_4.jpg](./share/pictures/gba_opened_4.jpg)  ![gba_menu_2.jpg](./share/pictures/gba_menu_2.jpg)
 
-![set_compact.jpg](.attachments.9113680/set_compact.jpg)
+![set_compact.jpg](./share/pictures/set_compact.jpg)
 
 ## 🪧 Setup
 
